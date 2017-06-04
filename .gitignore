@@ -1,7 +1,7 @@
 # CakePHP 3
 
 /vendor/*
-/config/app.php
+/plugins/Cakephp3Bulker/config/app.php
 
 /tmp/cache/models/*
 !/tmp/cache/models/empty
@@ -17,9 +17,5 @@
 /logs/*
 !/logs/empty
 
-# CakePHP 2
-
-/app/tmp/*
-/app/Config/core.php
-/app/Config/database.php
-/vendors/*
+# Mac
+.DS_Store
