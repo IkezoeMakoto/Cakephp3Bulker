@@ -10,6 +10,11 @@ use Cake\ORM\Table;
  */
 class BulkerBehavior extends Behavior
 {
+    public function __construct(Table $table, array $config = [])
+    {
+        parent::__construct($table, $config);
+    }
+
     /**
      *
      * @param array $saveData

@@ -25,7 +25,10 @@ class BulkerBehaviorTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->Bulker = new BulkerBehavior();
+
+        $dummy = $this->getMockForModel('dummy');
+
+        $this->Bulker = new BulkerBehavior($dummy);
     }
 
     /**
