@@ -38,8 +38,6 @@ class BulkerBehaviorTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Bulker);
-
         parent::tearDown();
     }
 

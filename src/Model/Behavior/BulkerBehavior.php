@@ -4,6 +4,7 @@ namespace Cakephp3Bulker\Model\Behavior;
 
 use Cake\ORM\Behavior;
 use Cake\ORM\Table;
+use Cake\Validation\Validator;
 
 /**
  * Bulker behavior

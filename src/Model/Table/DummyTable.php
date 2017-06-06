@@ -37,6 +37,7 @@ class DummyTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Cakephp3Bulker.Bulker');
     }
 
     /**
