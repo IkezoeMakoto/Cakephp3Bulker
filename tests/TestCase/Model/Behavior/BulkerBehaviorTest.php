@@ -1,6 +1,8 @@
 <?php
 namespace Cakephp3Bulker\Test\TestCase\Model\Behavior;
 
+use Cake\I18n\Time;
+use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Cakephp3Bulker\Model\Behavior\BulkerBehavior;
 
@@ -13,9 +15,18 @@ class BulkerBehaviorTest extends TestCase
     /**
      * Test subject
      *
-     * @var \Cakephp3Bulker\Model\Behavior\BulkerBehavior
+     * @var \Cakephp3Bulker\Model\Table\DummyTable
      */
     public $Bulker;
+
+    /**
+     * Fixtures
+     *
+     * @var array
+     */
+    public $fixtures = [
+        'plugin.cakephp3_bulker.dummy'
+    ];
 
     /**
      * setUp method
@@ -26,9 +37,7 @@ class BulkerBehaviorTest extends TestCase
     {
         parent::setUp();
 
-        $dummy = $this->getMockForModel('dummy');
-
-        $this->Bulker = new BulkerBehavior($dummy);
+        $this->Bulker = TableRegistry::get('Cakephp3Bulker.dummy');
     }
 
     /**
@@ -58,7 +67,13 @@ class BulkerBehaviorTest extends TestCase
      */
     public function saveBulk_saveSuccess()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $result = $this->Bulker->saveBulk(
+            [
+                ['name' => 'hoge', 'created' => Time::now(), 'modified' => Time::now()],
+                ['name' => 'huga', 'created' => Time::now(), 'modified' => Time::now()]
+            ]
+        );
+        $this->assertSame(2, $result);
     }
 
     /**
