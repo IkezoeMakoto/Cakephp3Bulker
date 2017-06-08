@@ -40,9 +40,18 @@ class BulkerBehavior extends Behavior
 
         // Set Fields
         $query->insert($fields);
+        // Set Values
         $query->clause('values')->values($saveDataList);
 
+
         // TODO: ON DUPLICATE KEY UPDATE logic
+        $updateKey = [];
+        foreach ($fields as $field) {
+            $updateKey[] = $field . ' = (' . $field . ')';
+        }
+        $updateKeyStr = 'ON DUPLICATE KEY UPDATE ' . implode(', ', $updateKey);
+        // Set ON DUPLICATE KEY UPDATE
+        $query->epilog($updateKeyStr);
 
         return $query->execute()->rowCount();
     }
