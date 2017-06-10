@@ -56,6 +56,14 @@ class DummyTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
+        $validator
+            ->requirePresence('created', 'create')
+            ->notEmpty('created');
+
+        $validator
+            ->requirePresence('modified', 'update')
+            ->notEmpty('modified');
+
         return $validator;
     }
 }

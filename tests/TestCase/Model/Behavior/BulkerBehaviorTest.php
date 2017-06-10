@@ -109,6 +109,13 @@ class BulkerBehaviorTest extends TestCase
      */
     public function saveBulk_failuerValidate()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $result = $this->Bulker->saveBulk(
+            [
+                ['name' => 'hoge', 'modified' => Time::now()],
+                ['name' => 'huga', 'modified' => Time::now()]
+            ]
+        );
+
+        $this->assertFalse($result);
     }
 }

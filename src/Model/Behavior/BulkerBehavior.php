@@ -21,11 +21,19 @@ class BulkerBehavior extends Behavior
      * @param array $saveData
      * @param array $options
      *
-     * @return int
+     * @return int|bool int: count save rows, bool: It is false when saving fails
      */
     public function saveBulk(array $saveDataList, array $options = [])
     {
-        // TODO: validate logicta
+        // Validate logic
+        $isValidateError = false;
+        $checkEntities = $this->_table->newEntities($saveDataList);
+        foreach ($checkEntities as $checkEntity) {
+            $isValidateError = !empty($checkEntity->errors());
+            if ($isValidateError) {
+                return false;
+            }
+        }
 
         // Bulk insert logic
         $firstValues = current($saveDataList);
@@ -44,7 +52,7 @@ class BulkerBehavior extends Behavior
         $query->clause('values')->values($saveDataList);
 
 
-        // TODO: ON DUPLICATE KEY UPDATE logic
+        // ON DUPLICATE KEY UPDATE logic
         $updateKey = [];
         foreach ($fields as $field) {
             $updateKey[] = $field . ' = VALUES(' . $field . ')';
