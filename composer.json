@@ -2,6 +2,7 @@
     "name": "ikezoe-makoto/cakephp3bulker",
     "description": "cakephp3bulker plugin for CakePHP",
     "type": "cakephp-plugin",
+    "license": "MIT",
     "require": {
         "cakephp/cakephp": "^3.4"
     },
