@@ -1,6 +1,6 @@
 {
-    "name": "IkezoeMakoto/Cakephp3Bulker",
-    "description": "Cakephp3Bulker plugin for CakePHP",
+    "name": "ikezoe-makoto/cakephp3bulker",
+    "description": "cakephp3bulker plugin for CakePHP",
     "type": "cakephp-plugin",
     "require": {
         "cakephp/cakephp": "^3.4"
