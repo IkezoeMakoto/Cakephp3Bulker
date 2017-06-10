@@ -6,7 +6,6 @@ dependencies:
   cache_directories:
     - ~/.composer/
   override:
-    - composer self-update
     - composer install --dev
 
 test:
