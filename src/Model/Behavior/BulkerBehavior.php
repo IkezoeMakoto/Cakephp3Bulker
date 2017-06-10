@@ -47,7 +47,7 @@ class BulkerBehavior extends Behavior
         // TODO: ON DUPLICATE KEY UPDATE logic
         $updateKey = [];
         foreach ($fields as $field) {
-            $updateKey[] = $field . ' = (' . $field . ')';
+            $updateKey[] = $field . ' = VALUES(' . $field . ')';
         }
         $updateKeyStr = 'ON DUPLICATE KEY UPDATE ' . implode(', ', $updateKey);
         // Set ON DUPLICATE KEY UPDATE

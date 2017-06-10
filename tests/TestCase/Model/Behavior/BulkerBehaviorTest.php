@@ -65,7 +65,7 @@ class BulkerBehaviorTest extends TestCase
      *
      * @return void
      */
-    public function saveBulk_saveSuccess()
+    public function saveBulk_insertSuccess()
     {
         $result = $this->Bulker->saveBulk(
             [
@@ -74,6 +74,32 @@ class BulkerBehaviorTest extends TestCase
             ]
         );
         $this->assertSame(2, $result);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function saveBulk_updateSuccess()
+    {
+        $this->Bulker->saveBulk(
+            [
+                ['name' => 'hoge', 'created' => Time::now(), 'modified' => Time::now()],
+                ['name' => 'huga', 'created' => Time::now(), 'modified' => Time::now()]
+            ]
+        );
+
+        $this->Bulker->saveBulk(
+            [
+                ['id' => 1, 'name' => 'hogeUpdate', 'created' => Time::now(), 'modified' => Time::now()],
+                ['id' => 2, 'name' => 'hugaUpdate', 'created' => Time::now(), 'modified' => Time::now()]
+            ]
+        );
+        $result = $this->Bulker->find()->all()->toArray();
+
+        $this->assertSame('hogeUpdate', $result[0]['name']);
+        $this->assertSame('hugaUpdate', $result[1]['name']);
     }
 
     /**
