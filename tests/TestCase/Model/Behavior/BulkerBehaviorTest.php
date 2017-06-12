@@ -17,7 +17,7 @@ class BulkerBehaviorTest extends TestCase
      *
      * @var \Cakephp3Bulker\Model\Table\DummyTable
      */
-    public $Bulker;
+    public $Dummy;
 
     /**
      * Fixtures
@@ -37,7 +37,11 @@ class BulkerBehaviorTest extends TestCase
     {
         parent::setUp();
 
-        $this->Bulker = TableRegistry::get('Cakephp3Bulker.dummy');
+        $this->Dummy = TableRegistry::get('Dummy', ['className' => 'Cakephp3Bulker\Model\Table\DummyTable']);
+        if ($this->Dummy->hasBehavior('Bulker')) {
+            $this->Dummy->removeBehavior('Bulker');
+        }
+        $this->Dummy->addBehavior('Cakephp3Bulker.Bulker');
     }
 
     /**
@@ -47,7 +51,9 @@ class BulkerBehaviorTest extends TestCase
      */
     public function tearDown()
     {
+        unset($this->Dummy);
         parent::tearDown();
+
     }
 
     /**
@@ -57,7 +63,7 @@ class BulkerBehaviorTest extends TestCase
      */
     public function saveBulk_insertSuccess()
     {
-        $result = $this->Bulker->saveBulk(
+        $result = $this->Dummy->saveBulk(
             [
                 ['name' => 'hoge', 'created' => Time::now(), 'modified' => Time::now()],
                 ['name' => 'huga', 'created' => Time::now(), 'modified' => Time::now()]
@@ -73,20 +79,20 @@ class BulkerBehaviorTest extends TestCase
      */
     public function saveBulk_updateSuccess()
     {
-        $this->Bulker->saveBulk(
+        $this->Dummy->saveBulk(
             [
                 ['name' => 'hoge', 'created' => Time::now(), 'modified' => Time::now()],
                 ['name' => 'huga', 'created' => Time::now(), 'modified' => Time::now()]
             ]
         );
 
-        $this->Bulker->saveBulk(
+        $this->Dummy->saveBulk(
             [
                 ['id' => 1, 'name' => 'hogeUpdate', 'created' => Time::now(), 'modified' => Time::now()],
                 ['id' => 2, 'name' => 'hugaUpdate', 'created' => Time::now(), 'modified' => Time::now()]
             ]
         );
-        $result = $this->Bulker->find()->all()->toArray();
+        $result = $this->Dummy->find()->all()->toArray();
 
         $this->assertSame('hogeUpdate', $result[0]['name']);
         $this->assertSame('hugaUpdate', $result[1]['name']);
@@ -99,7 +105,7 @@ class BulkerBehaviorTest extends TestCase
      */
     public function saveBulk_failuerValidate()
     {
-        $result = $this->Bulker->saveBulk(
+        $result = $this->Dummy->saveBulk(
             [
                 ['name' => 'hoge', 'modified' => Time::now()],
                 ['name' => 'huga', 'modified' => Time::now()]
