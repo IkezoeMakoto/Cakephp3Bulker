@@ -68,10 +68,10 @@ Cake\Datasource\ConnectionManager::config('test', [
     'className' => 'Cake\Database\Connection',
     'driver' => 'Cake\Database\Driver\Mysql',
     'persistent' => false,
-    'host' => 'db',
-    'username' => 'root',
-    'password' => 'root',
-    'database' => 'app',
+    'host' => '127.0.0.1',
+    'username' => 'ubuntu',
+    'password' => '',
+    'database' => 'circle_test',
     'encoding' => 'utf8',
     'timezone' => 'UTC'
 ]);
