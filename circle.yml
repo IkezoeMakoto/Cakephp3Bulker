@@ -9,5 +9,5 @@ dependencies:
     - composer install --dev
 
 test:
-  pre:
-    - echo "-----start test-----"
+  override:
+    - vendor/bin/phpunit -c phpunit.xml.dist
