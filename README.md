@@ -26,8 +26,6 @@ Use the Bulker Behavior on your model Table class:
 ```
 // in src/Model/Table/UsersTable.php
 ...
-use SoftDelete\Model\Table\SoftDeleteTrait;
-
 class UsersTable extends Table
 {
     public function example()
